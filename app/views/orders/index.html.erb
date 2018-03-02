@@ -1,0 +1,28 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col" style="text-align: center">Precio Unitario</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col" style="text-align: center">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.product.name %></td>
+          <td style="text-align: center">$<%= order.product.price %></td>
+          <td><%= order.quantity %></td>
+          <td style="text-align: center">$<%= order.quantity * order.product.price %></td>
+          <td><a href="<%= order_path(order)%>" class="btn btn-warning" data-method="delete"><i class="fas fa-trash-alt"></i></a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div style="text-align: right"><strong>Total: $</strong><%= @total %><%= link_to 'continuar ', root_path, class: 'btn btn-primary'%>
+</div>
+
+<%= link_to 'Vaciar carro', empty_cart_path, class: 'btn btn-danger', method: :delete%>
+
+</div>
